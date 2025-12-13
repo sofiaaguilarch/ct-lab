@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "e977d73f-43d8-4659-a592-4a9aca534446",
+		"name": "T2NewTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47209156",
+		"_collection_link": "https://material-astronomer-17324710-5713003.postman.co/workspace/4073fdf0-b87c-4707-8fd9-85983f6fd022/collection/47209156-e977d73f-43d8-4659-a592-4a9aca534446?action=share&source=collection_link&creator=47209156"
+	},
+	"item": [
+		{
+			"name": "LogIn",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"timestamp\", Date.now());\r",
+							"const fakeToken = \"token-\" + pm.variables.replaceIn(\"{{$randomUUID}}\");\r",
+							"pm.environment.set(\"temp_token\", fakeToken);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status 200 OK\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Token recibido\", () => {\r",
+							"    pm.expect(json).to.have.property(\"accessToken\");\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"token\", json.accessToken);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"michaelw\",\r\n  \"password\": \"michaelwpass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/user/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status 201 OK\", () => pm.response.to.have.status(201));\r",
+							"\r",
+							"pm.test(\"Devuelve ID\", () => {\r",
+							"    pm.expect(json).to.have.property(\"id\");\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"user_id\", json.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"maidenName\": \"Mendez\",\r\n  \"age\": 25,\r\n  \"gender\": \"female\",\r\n  \"email\": \"sofia.aguilar@example.com\",\r\n  \"phone\": \"+1 555-123-4567\",\r\n  \"username\": \"sofiatest\",\r\n  \"password\": \"StrongPass123\",\r\n  \"birthDate\": \"2000-03-15\",\r\n  \"image\": \"https://dummyjson.com/icon/user/128\",\r\n  \"bloodGroup\": \"O+\",\r\n  \"height\": 165,\r\n  \"weight\": 60,\r\n  \"eyeColor\": \"Brown\",\r\n  \"hair\": {\r\n    \"color\": \"Dark Brown\",\r\n    \"type\": \"Wavy\"\r\n  },\r\n  \"ip\": \"192.168.1.25\",\r\n  \"address\": {\r\n    \"address\": \"123 Main Street\",\r\n    \"city\": \"San José\",\r\n    \"state\": \"Costa Rica\",\r\n    \"stateCode\": \"CR\",\r\n    \"postalCode\": \"10101\",\r\n    \"coordinates\": {\r\n      \"lat\": 9.9281,\r\n      \"lng\": -84.0907\r\n    },\r\n    \"country\": \"Costa Rica\"\r\n  },\r\n  \"macAddress\": \"00:1A:C2:7B:00:47\",\r\n  \"university\": \"Universidad Latina\",\r\n  \"bank\": {\r\n    \"cardExpire\": \"12/28\",\r\n    \"cardNumber\": \"4539578763621486\",\r\n    \"cardType\": \"Visa\",\r\n    \"currency\": \"CRC\",\r\n    \"iban\": \"CR05015202001026284066\"\r\n  },\r\n  \"company\": {\r\n    \"department\": \"QA\",\r\n    \"name\": \"Tech Solutions\",\r\n    \"title\": \"QA Tester\",\r\n    \"address\": {\r\n      \"address\": \"456 Tech Road\",\r\n      \"city\": \"Heredia\",\r\n      \"state\": \"Costa Rica\",\r\n      \"stateCode\": \"CR\",\r\n      \"postalCode\": \"40101\",\r\n      \"coordinates\": {\r\n        \"lat\": 9.9981,\r\n        \"lng\": -84.1167\r\n      },\r\n      \"country\": \"Costa Rica\"\r\n    }\r\n  },\r\n  \"ein\": \"123-456\",\r\n  \"ssn\": \"123-45-6789\",\r\n  \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64)\",\r\n  \"crypto\": {\r\n    \"coin\": \"Ethereum\",\r\n    \"wallet\": \"0x123abc456def789ghi123abc456def789ghi123a\",\r\n    \"network\": \"ERC20\"\r\n  },\r\n  \"role\": \"user\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users/add",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+							"\r",
+							"const json = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Tiene nombre\", () => {\r",
+							"    pm.expect(json).to.have.property(\"firstName\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://dummyjson.com/users/{{uuid}}",
+					"protocol": "https",
+					"host": [
+						"dummyjson",
+						"com"
+					],
+					"path": [
+						"users",
+						"{{uuid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EnpointError",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Debe fallar\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400,404]);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/users/999999",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"999999"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
