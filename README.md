@@ -67,11 +67,11 @@ El proyecto incluye un workflow de GitHub Actions que se ejecuta automáticament
 
 El pipeline realiza:
 
-*Instalación de dependencias
+* Instalación de dependencias
 
-*Ejecución de pruebas API con Newman
+* Ejecución de pruebas API con Newman
 
-*Ejecución de pruebas UI con Playwright
+* Ejecución de pruebas UI con Playwright
 
 
 ## 📌 Nota Final
