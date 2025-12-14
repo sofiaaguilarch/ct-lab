@@ -1,6 +1,6 @@
-# 🧪 LABORATORIO FINAL – API Testing con Playwright + Postman + Docker + GitHub Actions
+# 🧪 LABORATORIO FINAL – API Testing con Playwright + Postman + GitHub Actions
 
-Laboratorio de **Integración Continua (CI)** que implementa pruebas automatizadas de **API REST** y **UI**, integrando **Postman/Newman**, **Playwright**, **Docker** y **GitHub Actions** para la ejecución automática de pruebas y generación de reportes.
+Laboratorio de **Integración Continua (CI)** que implementa pruebas automatizadas de **API REST** y **UI**, integrando **Postman/Newman**, **Playwright**, y **GitHub Actions** para la ejecución automática de pruebas y generación de reportes.
 
 ---
 
