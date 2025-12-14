@@ -1,0 +1,31 @@
+{
+  "name": "ct-lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test:newman": "npx newman run newman/T2NewTest.postman_collection.json -e newman/DevTarea2.postman_environment.json",
+    "test:playwright:report": "npx playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sofiaaguilarch/ct-lab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sofiaaguilarch/ct-lab/issues"
+  },
+  "homepage": "https://github.com/sofiaaguilarch/ct-lab#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "install": "^0.13.0",
+    "newman": "^6.2.1",
+    "npx": "^10.2.2",
+    "playwright": "^1.57.0"
+  }
+}
